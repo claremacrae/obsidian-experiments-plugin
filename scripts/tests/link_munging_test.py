@@ -5,7 +5,14 @@ import re
 
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
-    p = re.compile(r"""\[GitHub\ -\ ([a-z\d)]+)/([a-z\d.-]+)(:\ [A-Za-z\d\ :.\-,]+)]\(https://github.com/\1/\2\)""", re.VERBOSE)
+    p = re.compile(r"""\[ # Open a markdown link
+                        GitHub\ -\                          # GitHub prefix to page title
+                        ([a-z\d)]+)                         # User/organisation name
+                        /
+                        ([a-z\d.-]+)                        # Repo name
+                        (:\ [A-Za-z\d\ :.\-,]+)]            # Description of repo
+                       \(https://github.com/\1/\2\)""",     # Repo URL
+                       re.VERBOSE)
     return p.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
 
 
