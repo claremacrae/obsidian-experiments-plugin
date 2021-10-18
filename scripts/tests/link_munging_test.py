@@ -1,7 +1,9 @@
 import unittest
 import re
 
-# Useful for testing: https://regex101.com
+# Useful for testing:
+#   https://regex101.com
+#   https://regexr.com
 
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
