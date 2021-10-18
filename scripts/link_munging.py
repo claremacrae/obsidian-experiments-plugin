@@ -24,12 +24,19 @@ def print_python_and_js_patterns(whole_pattern):
     print(f"javascript: {js_pattern}")
 
 
+def print_python_and_js_replacement_text(replacement_text):
+    print(f"python:     {replacement_text}")
+    js_pattern = replacement_text.replace('\\', "$")
+    print(f"javascript: {js_pattern}")
+
+
 def convert_github_url(v1):
     whole_pattern = pattern_linking_repo_title_to_url()
     print_python_and_js_patterns(whole_pattern)
 
     github_repo_hyperlink = re.compile(whole_pattern)
 
-    # [$2/**$3**](https://github.com/$2/$3)$4 on PyCharm
     replacement_text = r'[\2/**\3**](https://github.com/\2/\3)\4'
+    print_python_and_js_replacement_text(replacement_text)
+
     return github_repo_hyperlink.sub(replacement_text, v1)
