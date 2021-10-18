@@ -5,7 +5,7 @@ import re
 
 def convert_github_url(v1):
     # username: https://github.com/shinnn/github-username-regex
-    p = re.compile(r'\[GitHub - ([a-z\d)]+)\/(sample-repo-name)(: Sample:,- Description)]\(https:\/\/github.com\/username\/sample-repo-name\)')
+    p = re.compile(r'\[GitHub - ([a-z\d)]+)\/([a-z\d.-]+)(: Sample:,- Description)]\(https:\/\/github.com\/username\/sample-repo-name\)')
     return p.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
 
 
