@@ -5,7 +5,7 @@ import re
 
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
-    github_repo_hyperlink = re.compile(r"""\[(?:GitHub\ -\ )?([A-Za-z-\d)]+)/([a-z\d\-_]+)(:\ [A-Za-z\d :.\-,_()/]+){0,1}]\(https://github.com/\1/\2/?\)""")
+    github_repo_hyperlink = re.compile(r"""\[(?:GitHub\ -\ )?([A-Za-z-\d)]+)/([a-z\d\-_]+)(:\ [^]]+){0,1}]\(https://github.com/\1/\2/?\)""")
     # [$1/**$2**](https://github.com/$1/$2)$3 on PyCharm
     return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
 
@@ -39,6 +39,11 @@ class LinkMungingTestCase(unittest.TestCase):
     def test_github_with_trailing_slash(self):
         v1 = r'[pimoroni/flotilla-rockpool: The Flotilla web dashboard](https://github.com/pimoroni/flotilla-rockpool/)'
         v2 = r'[pimoroni/**flotilla-rockpool**](https://github.com/pimoroni/flotilla-rockpool): The Flotilla web dashboard'
+        self.check_conversion(v1, v2)
+
+    def test_github_with_yet_another_unrecognised_character_in_description(self):
+        v1 = r'[GitHub - arnemertz/commandline-videostore-cpp: C++ port of https://github.com/rickjanda/commandline-videostore](https://github.com/arnemertz/commandline-videostore-cpp)'
+        v2 = r'[arnemertz/**commandline-videostore-cpp**](https://github.com/arnemertz/commandline-videostore-cpp): C++ port of https://github.com/rickjanda/commandline-videostore'
         self.check_conversion(v1, v2)
 
     def check_conversion(self, v1, v2):
