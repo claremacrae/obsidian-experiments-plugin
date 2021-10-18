@@ -8,7 +8,7 @@ import re
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
     optional_github_prefix = r"""(?:GitHub - )?"""
-    whole_pattern = fr"""\[%s([A-Za-z-\d)]+)/([a-z\d\-_.]+)(: [^]]+){{0,1}}]\(https://github.com/\1/\2/?\)""" % optional_github_prefix
+    whole_pattern = fr"""\[{optional_github_prefix}([A-Za-z-\d)]+)/([a-z\d\-_.]+)(: [^]]+){{0,1}}]\(https://github.com/\1/\2/?\)"""
     github_repo_hyperlink = re.compile(whole_pattern)
     # [$1/**$2**](https://github.com/$1/$2)$3 on PyCharm
     return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
