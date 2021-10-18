@@ -31,4 +31,5 @@ def convert_github_url(v1):
     github_repo_hyperlink = re.compile(whole_pattern)
 
     # [$2/**$3**](https://github.com/$2/$3)$4 on PyCharm
-    return github_repo_hyperlink.sub(r'[\2/**\3**](https://github.com/\2/\3)\4', v1)
+    replacement_text = r'[\2/**\3**](https://github.com/\2/\3)\4'
+    return github_repo_hyperlink.sub(replacement_text, v1)
