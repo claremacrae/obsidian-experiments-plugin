@@ -16,6 +16,11 @@ class LinkMungingTestCase(unittest.TestCase):
         v2 = r'[UserName/**sample-repo-name**](https://github.com/UserName/sample-repo-name): Sample:,_()- Description'
         self.check_conversion(v1, v2)
 
+    # def test_github_link_with_description_but_no_github_prefix(self):
+    #     v1 = r'[UserName/sample-repo-name: Sample:,_()- Description](https://github.com/UserName/sample-repo-name)'
+    #     v2 = r'[UserName/**sample-repo-name**](https://github.com/UserName/sample-repo-name): Sample:,_()- Description'
+    #     self.check_conversion(v1, v2)
+
     def test_github_link_without_description(self):
         v1 = r'[GitHub - copperspice/doxypress](https://github.com/copperspice/doxypress)'
         v2 = r'[copperspice/**doxypress**](https://github.com/copperspice/doxypress)'
@@ -27,10 +32,8 @@ class LinkMungingTestCase(unittest.TestCase):
         self.check_conversion(v1, v2)
 
     def test_github_failing_link2(self):
-        # v1 = r'[GitHub - Dmitriy-Shulha/obsidian-css-snippets: Most common appearance solutions for Obsidian now in a single place. Initially collected by Klaas: https://forum.obsidian.md/t/how-to-achieve-css-code-snippets/8474](https://github.com/Dmitriy-Shulha/obsidian-css-snippets)'
-        # v2 = r'[Dmitriy-Shulha/**obsidian-css-snippets**](https://github.com/Dmitriy-Shulha/obsidian-css-snippets): Most common appearance solutions for Obsidian now in a single place. Initially collected by Klaas: https://forum.obsidian.md/t/how-to-achieve-css-code-snippets/8474'
-        v1 = r'[GitHub - Dmitriy-Shulha/obsidian-css-snippets](https://github.com/Dmitriy-Shulha/obsidian-css-snippets)'
-        v2 = r'[Dmitriy-Shulha/**obsidian-css-snippets**](https://github.com/Dmitriy-Shulha/obsidian-css-snippets)'
+        v1 = r'[GitHub - Dmitriy-Shulha/obsidian-css-snippets: Most common appearance solutions for Obsidian now in a single place. Initially collected by Klaas: https://forum.obsidian.md/t/how-to-achieve-css-code-snippets/8474](https://github.com/Dmitriy-Shulha/obsidian-css-snippets)'
+        v2 = r'[Dmitriy-Shulha/**obsidian-css-snippets**](https://github.com/Dmitriy-Shulha/obsidian-css-snippets): Most common appearance solutions for Obsidian now in a single place. Initially collected by Klaas: https://forum.obsidian.md/t/how-to-achieve-css-code-snippets/8474'
         self.check_conversion(v1, v2)
 
     def check_conversion(self, v1, v2):
