@@ -1,11 +1,11 @@
 import unittest
 import re
 
-
+# Useful for testing: https://regex101.com
 
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
-    github_repo_hyperlink = re.compile(r"""\[(?:GitHub\ -\ )?([A-Za-z-\d)]+)/([a-z\d\-_.]+)(:\ [^]]+){0,1}]\(https://github.com/\1/\2/?\)""")
+    github_repo_hyperlink = re.compile(r"""\[(?:GitHub - )?([A-Za-z-\d)]+)/([a-z\d\-_.]+)(: [^]]+){0,1}]\(https://github.com/\1/\2/?\)""")
     # [$1/**$2**](https://github.com/$1/$2)$3 on PyCharm
     return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
 
