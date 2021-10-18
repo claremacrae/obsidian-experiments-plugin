@@ -18,12 +18,15 @@ def pattern_linking_repo_title_to_url():
     return whole_pattern
 
 
-def convert_github_url(v1):
-    whole_pattern = pattern_linking_repo_title_to_url()
+def print_python_and_js_patterns(whole_pattern):
     print(f"python:     {whole_pattern}")
-
     js_pattern = whole_pattern.replace('/', r'\/')
     print(f"javascript: {js_pattern}")
+
+
+def convert_github_url(v1):
+    whole_pattern = pattern_linking_repo_title_to_url()
+    print_python_and_js_patterns(whole_pattern)
 
     github_repo_hyperlink = re.compile(whole_pattern)
 
