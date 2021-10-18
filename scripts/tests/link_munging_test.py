@@ -5,7 +5,7 @@ import re
 
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
-    github_repo_hyperlink = re.compile(r"""\[GitHub\ -\ ([A-Za-z-\d)]+)/([a-z\d\-_]+)(:\ [A-Za-z\d :.\-,_()/]+){0,1}]\(https://github.com/\1/\2\)""")
+    github_repo_hyperlink = re.compile(r"""\[(?:GitHub\ -\ )?([A-Za-z-\d)]+)/([a-z\d\-_]+)(:\ [A-Za-z\d :.\-,_()/]+){0,1}]\(https://github.com/\1/\2\)""")
     # [$1/**$2**](https://github.com/$1/$2)$3 on PyCharm
     return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
 
@@ -16,10 +16,10 @@ class LinkMungingTestCase(unittest.TestCase):
         v2 = r'[UserName/**sample-repo-name**](https://github.com/UserName/sample-repo-name): Sample:,_()- Description'
         self.check_conversion(v1, v2)
 
-    # def test_github_link_with_description_but_no_github_prefix(self):
-    #     v1 = r'[UserName/sample-repo-name: Sample:,_()- Description](https://github.com/UserName/sample-repo-name)'
-    #     v2 = r'[UserName/**sample-repo-name**](https://github.com/UserName/sample-repo-name): Sample:,_()- Description'
-    #     self.check_conversion(v1, v2)
+    def test_github_link_with_description_but_no_github_prefix(self):
+        v1 = r'[UserName/sample-repo-name: Sample:,_()- Description](https://github.com/UserName/sample-repo-name)'
+        v2 = r'[UserName/**sample-repo-name**](https://github.com/UserName/sample-repo-name): Sample:,_()- Description'
+        self.check_conversion(v1, v2)
 
     def test_github_link_without_description(self):
         v1 = r'[GitHub - copperspice/doxypress](https://github.com/copperspice/doxypress)'
