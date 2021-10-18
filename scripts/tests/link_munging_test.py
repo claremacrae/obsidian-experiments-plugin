@@ -11,17 +11,22 @@ def convert_github_url(v1):
                         ([a-z\d)]+)                         # User/organisation name
                         /
                         ([a-z\d.-]+)                        # Repo name
-                        (:\ [A-Za-z\d :.\-,]+)]            # Description of repo
+                        (:\ [A-Za-z\d :.\-,]+){0,1}         # Description of repo - optional
+                        ]
                        \(https://github.com/\1/\2\)""",     # Repo URL
                        re.VERBOSE)
     return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
 
 
 class LinkMungingTestCase(unittest.TestCase):
-    def test_github_links(self):
+    def test_github_link_with_description(self):
         v1 = r'[GitHub - username/sample-repo-name: Sample:,- Description](https://github.com/username/sample-repo-name)'
         v2 = r'[username/**sample-repo-name**](https://github.com/username/sample-repo-name): Sample:,- Description'
+        self.assertEqual(v2, convert_github_url(v1))  # add assertion here
 
+    def test_github_link_without_description(self):
+        v1 = r'[GitHub - copperspice/doxypress](https://github.com/copperspice/doxypress)'
+        v2 = r'[copperspice/**doxypress**](https://github.com/copperspice/doxypress)'
         self.assertEqual(v2, convert_github_url(v1))  # add assertion here
 
 
