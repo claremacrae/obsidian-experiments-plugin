@@ -6,7 +6,7 @@ import re
 #   https://regexr.com
 
 
-def convert_github_url(v1):
+def pattern_linking_repo_title_to_url():
     # https://github.com/isiahmeadows/github-limits
     optional_github_prefix = r'(GitHub - ){0,1}'
     user_name = r'([A-Za-z-\d)]+)'
@@ -15,6 +15,11 @@ def convert_github_url(v1):
     github_url = fr'https://github.com/{user_name}/{repo_name}/?'
 
     whole_pattern = fr"""\[{optional_github_prefix}{user_name}/{repo_name}{description}\]\({github_url}\)"""
+    return whole_pattern
+
+
+def convert_github_url(v1):
+    whole_pattern = pattern_linking_repo_title_to_url()
     print(f"python:     {whole_pattern}")
 
     js_pattern = whole_pattern.replace('/', r'\/')
