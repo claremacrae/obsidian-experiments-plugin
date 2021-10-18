@@ -4,7 +4,8 @@ import re
 
 
 def convert_github_url(v1):
-    return r'[username/**sample-repo-name**](https://github.com/username/sample-repo-name): Sample:,- Description'
+    p = re.compile(r'\[GitHub - (username)\/(sample-repo-name)(: Sample:,- Description)]\(https:\/\/github.com\/username\/sample-repo-name\)')
+    return p.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
 
 
 class LinkMungingTestCase(unittest.TestCase):
