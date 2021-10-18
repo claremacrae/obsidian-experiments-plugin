@@ -11,7 +11,8 @@ def convert_github_url(v1):
     user_name = r'([A-Za-z-\d)]+)'
     repo_name = r'([a-z\d\-_.]+)'
     description = r'(: [^]]+){0,1}'
-    whole_pattern = fr"""\[{optional_github_prefix}{user_name}/{repo_name}{description}]\(https://github.com/\1/\2/?\)"""
+    github_url = r'https://github.com/\1/\2/?'
+    whole_pattern = fr"""\[{optional_github_prefix}{user_name}/{repo_name}{description}]\({github_url}\)"""
     github_repo_hyperlink = re.compile(whole_pattern)
     # [$1/**$2**](https://github.com/$1/$2)$3 on PyCharm
     return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
