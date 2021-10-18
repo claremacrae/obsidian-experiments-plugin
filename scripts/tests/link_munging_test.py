@@ -11,7 +11,7 @@ def convert_github_url(v1):
                         ([a-z\d)]+)                         # User/organisation name
                         /
                         ([a-z\d.-]+)                        # Repo name
-                        (:\ [A-Za-z\d\ :.\-,]+)]            # Description of repo
+                        (:\ [A-Za-z\d :.\-,]+)]            # Description of repo
                        \(https://github.com/\1/\2\)""",     # Repo URL
                        re.VERBOSE)
     return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
