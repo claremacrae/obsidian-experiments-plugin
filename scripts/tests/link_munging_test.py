@@ -5,7 +5,8 @@ import re
 
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
-    p = re.compile(r"""\[ # Open a markdown link
+    github_repo_hyperlink = re.compile(r"""
+                        \[ # Open a markdown link
                         GitHub\ -\                          # GitHub prefix to page title
                         ([a-z\d)]+)                         # User/organisation name
                         /
@@ -13,7 +14,7 @@ def convert_github_url(v1):
                         (:\ [A-Za-z\d\ :.\-,]+)]            # Description of repo
                        \(https://github.com/\1/\2\)""",     # Repo URL
                        re.VERBOSE)
-    return p.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
+    return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
 
 
 class LinkMungingTestCase(unittest.TestCase):
