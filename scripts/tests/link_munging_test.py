@@ -5,7 +5,8 @@ import re
 
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
-    github_repo_hyperlink = re.compile(r"""\[GitHub\ -\ ([A-Za-z\d)]+)/([a-z\d\-_]+)(:\ [A-Za-z\d :.\-,_()/]+){0,1}]\(https://github.com/\1/\2\)""")
+    github_repo_hyperlink = re.compile(r"""\[GitHub\ -\ ([A-Za-z-\d)]+)/([a-z\d\-_]+)(:\ [A-Za-z\d :.\-,_()/]+){0,1}]\(https://github.com/\1/\2\)""")
+    # [$1/**$2**](https://github.com/$1/$2)$3 on PyCharm
     return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
 
 
@@ -23,6 +24,13 @@ class LinkMungingTestCase(unittest.TestCase):
     def test_github_failing_link(self):
         v1 = r'[GitHub - maskiran/lightroom_collection_tree: Mirror the collection/collection sets in Lightroom onto the file system](https://github.com/maskiran/lightroom_collection_tree)'
         v2 = r'[maskiran/**lightroom_collection_tree**](https://github.com/maskiran/lightroom_collection_tree): Mirror the collection/collection sets in Lightroom onto the file system'
+        self.check_conversion(v1, v2)
+
+    def test_github_failing_link2(self):
+        # v1 = r'[GitHub - Dmitriy-Shulha/obsidian-css-snippets: Most common appearance solutions for Obsidian now in a single place. Initially collected by Klaas: https://forum.obsidian.md/t/how-to-achieve-css-code-snippets/8474](https://github.com/Dmitriy-Shulha/obsidian-css-snippets)'
+        # v2 = r'[Dmitriy-Shulha/**obsidian-css-snippets**](https://github.com/Dmitriy-Shulha/obsidian-css-snippets): Most common appearance solutions for Obsidian now in a single place. Initially collected by Klaas: https://forum.obsidian.md/t/how-to-achieve-css-code-snippets/8474'
+        v1 = r'[GitHub - Dmitriy-Shulha/obsidian-css-snippets](https://github.com/Dmitriy-Shulha/obsidian-css-snippets)'
+        v2 = r'[Dmitriy-Shulha/**obsidian-css-snippets**](https://github.com/Dmitriy-Shulha/obsidian-css-snippets)'
         self.check_conversion(v1, v2)
 
     def check_conversion(self, v1, v2):
