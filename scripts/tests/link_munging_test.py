@@ -7,7 +7,7 @@ import re
 
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
-    optional_github_prefix = r'(?:GitHub - )?'
+    optional_github_prefix = r'(GitHub - ){0,1}'
     user_name = r'([A-Za-z-\d)]+)'
     repo_name = r'([a-z\d\-_.]+)'
     description = r'(: [^]]+){0,1}'
@@ -20,8 +20,8 @@ def convert_github_url(v1):
     print(f"javascript: {js_pattern}")
 
     github_repo_hyperlink = re.compile(whole_pattern)
-    # [$1/**$2**](https://github.com/$1/$2)$3 on PyCharm
-    return github_repo_hyperlink.sub(r'[\1/**\2**](https://github.com/\1/\2)\3', v1)
+    # [$2/**$3**](https://github.com/$2/$3)$4 on PyCharm
+    return github_repo_hyperlink.sub(r'[\2/**\3**](https://github.com/\2/\3)\4', v1)
 
 
 class LinkMungingTestCase(unittest.TestCase):
