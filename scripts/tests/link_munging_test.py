@@ -7,7 +7,7 @@ import re
 
 def convert_github_url(v1):
     # https://github.com/isiahmeadows/github-limits
-    optional_github_prefix = r"""(?:GitHub - )?"""
+    optional_github_prefix = r'(?:GitHub - )?'
     user_name = r'([A-Za-z-\d)]+)'
     repo_name = r'([a-z\d\-_.]+)'
     description = r'(: [^]]+){0,1}'
