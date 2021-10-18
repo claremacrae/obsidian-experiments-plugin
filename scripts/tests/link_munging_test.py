@@ -10,10 +10,10 @@ def convert_github_url(v1):
     optional_github_prefix = r'(GitHub - ){0,1}'
     user_name = r'([A-Za-z-\d)]+)'
     repo_name = r'([a-z\d\-_.]+)'
-    description = r'(: [^]]+){0,1}'
+    description = r'(: [^\]]+){0,1}'
     github_url = fr'https://github.com/{user_name}/{repo_name}/?'
 
-    whole_pattern = fr"""\[{optional_github_prefix}{user_name}/{repo_name}{description}]\({github_url}\)"""
+    whole_pattern = fr"""\[{optional_github_prefix}{user_name}/{repo_name}{description}\]\({github_url}\)"""
     print(f"python:     {whole_pattern}")
 
     js_pattern = whole_pattern.replace('/', r'\/')
