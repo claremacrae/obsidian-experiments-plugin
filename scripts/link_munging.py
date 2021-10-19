@@ -10,7 +10,7 @@ def pattern_linking_repo_title_to_url():
     # https://github.com/isiahmeadows/github-limits
     optional_github_prefix = r'(GitHub - ){0,1}'
     user_name = r'([A-Za-z-\d)]+)'
-    repo_name = r'([a-z\d\-_.]+)'
+    repo_name = r'([A-Za-z\d\-_.]+)'
     description = r'(: [^\]]+){0,1}'
     github_url = fr'https://github.com/{user_name}/{repo_name}/?'
 

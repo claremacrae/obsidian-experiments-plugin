@@ -44,6 +44,11 @@ class LinkMungingTestCase(unittest.TestCase):
         v2 = r'[arnemertz/**commandline-videostore-cpp**](https://github.com/arnemertz/commandline-videostore-cpp): C++ port of https://github.com/rickjanda/commandline-videostore'
         self.check_conversion(v1, v2)
 
+    def test_github_with_yet_another_problem_case(self):
+        v1 = r'[GitHub - approvals/ApprovalTests.Python: ApprovalTests for python](https://github.com/approvals/ApprovalTests.Python)'
+        v2 = r'[approvals/**ApprovalTests.Python**](https://github.com/approvals/ApprovalTests.Python): ApprovalTests for python'
+        self.check_conversion(v1, v2)
+
     def check_conversion(self, v1, v2):
         self.assertEqual(v2, convert_github_url(v1))
 
