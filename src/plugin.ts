@@ -93,16 +93,8 @@ export class CollapseAllPlugin extends Plugin {
    */
   private onButtonClick(explorer: WorkspaceLeaf): void {
     if (explorer) {
-      new Notice("OK!");
-
-      // this.app.commands.executeCommandById('file-explorer:reveal-active-file');
-      // const items = this.getExplorerItems(explorer);
-      // const allCollapsed = this.foldersAreCollapsed(items);
-      // if (allCollapsed) {
-      //   this.expandAll(explorer);
-      // } else {
-      //   this.collapseAll(explorer);
-      // }
+      //@ts-ignore
+      this.app.commands.executeCommandById('file-explorer:reveal-active-file');
     }
   }
 
